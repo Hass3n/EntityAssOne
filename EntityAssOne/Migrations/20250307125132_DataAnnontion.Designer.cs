@@ -4,6 +4,7 @@ using EntityAssOne.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntityAssOne.Migrations
 {
     [DbContext(typeof(ITiDBContext))]
-    partial class ITiDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250307125132_DataAnnontion")]
+    partial class DataAnnontion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,12 +105,6 @@ namespace EntityAssOne.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmpId"));
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("Cairo");
-
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
@@ -156,8 +153,7 @@ namespace EntityAssOne.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Salary")
                         .HasColumnType("float");
@@ -187,13 +183,11 @@ namespace EntityAssOne.Migrations
 
                     b.Property<string>("FName")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LName")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -230,38 +224,12 @@ namespace EntityAssOne.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Name")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("Topics");
-                });
-
-            modelBuilder.Entity("common.Favourites", b =>
-                {
-                    b.Property<int>("FavId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FavId"));
-
-                    b.Property<DateTime>("FavDate")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2")
-                        .HasComputedColumnSql("GetDate()")
-                        .HasAnnotation("DateType", "Datetime");
-
-                    b.Property<string>("FavName")
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar")
-                        .HasColumnName("FavouritesName")
-                        .HasAnnotation("NaxLength", 20);
-
-                    b.HasKey("FavId");
-
-                    b.ToTable("Favourites", "favourite");
                 });
 #pragma warning restore 612, 618
         }
